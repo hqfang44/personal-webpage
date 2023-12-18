@@ -37,11 +37,15 @@ layout: default
         {% if page.collection == 'teaching' %}
           <p> {{ page.type }}, <i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }} </p>
         {% elsif page.venue and page.date %}
-          {% if page.authors %}
-            <p><b>{{ page.authors }}</b></p>
+          {% if page.author and page.latter-authors and page.former-authors %}
+            <p>page.former-authors, <b>{{ page.author }}</b>, page.latter-authors</p>
+          {% elsif page.author and page.former-authors %}
+            <p>page.former-authors, <b>{{ page.author }}</b></p>
+          {% elsif page.author and page.latter-authors %}
+            <p><b>{{ page.author }}</b>, page.latter-authors</p>
           {% endif %}
 <!--           <p>Published in <i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }} </p> -->
-          <p><b>{{ page.date | date: "%B %d, %Y" }}</b></p>
+          <p>{{ page.date | date: "%B %d, %Y" }}</p>
           <p><i>{{ page.venue }}</i></p>
         {% elsif page.date %}
           <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Published:" }}</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | default: "1900-01-01" | date: "%B %d, %Y" }}</time></p>
