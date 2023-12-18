@@ -38,11 +38,11 @@
     {% endif %}
     {% if post.venue%}
       {% if post.author and post.authors2 and post.authors1 %}
-        <p class="archive__item-excerpt" itemprop="description">{{ post.authors1 }}, <b>{{ post.author }}</b>, {{ post.authors2 }}. Published in <i>{{ post.venue }}</i></p>
+        <p class="archive__item-excerpt" itemprop="description">{{ post.authors1 }}, <b>{{ post.author }}</b>, {{ post.authors2 }} - <i>{{ post.venue }}</i></p>
       {% elsif post.author and post.authors1 %}
-        <p class="archive__item-excerpt" itemprop="description">{{ post.authors1 }}, <b>{{ post.author }}</b>. Published in <i>{{ post.venue }}</i></p>
+        <p class="archive__item-excerpt" itemprop="description">{{ post.authors1 }}, <b>{{ post.author }}</b> - <i>{{ post.venue }}</i></p>
       {% elsif post.author and post.authors2 %}
-        <p class="archive__item-excerpt" itemprop="description"><b>{{ post.author }}</b>, {{ post.authors2 }}. Published in <i>{{ post.venue }}</i></p>
+        <p class="archive__item-excerpt" itemprop="description"><b>{{ post.author }}</b>, {{ post.authors2 }} - <i>{{ post.venue }}</i></p>
       {% endif %}
 <!--       <p class="archive__item-excerpt" itemprop="description">{{ post.citation }}</p>  -->
     {% endif %}
