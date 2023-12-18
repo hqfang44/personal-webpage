@@ -11,7 +11,8 @@ redirect_from:
 
 Education
 ======
-* B.S. in Computer Science and Statistics, University of Washington, 2022-2026 (expected)
+* University of Washington, 2022-2026 (expected)
+  * B.S. in Computer Science, Statistics
 
 Experience
 ======
