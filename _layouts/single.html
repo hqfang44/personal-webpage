@@ -37,12 +37,12 @@ layout: default
         {% if page.collection == 'teaching' %}
           <p> {{ page.type }}, <i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }} </p>
         {% elsif page.venue and page.date %}
-          {% if page.author and page.latter-authors and page.former-authors %}
-            <p>page.former-authors, <b>{{ page.author }}</b>, page.latter-authors</p>
-          {% elsif page.author and page.former-authors %}
-            <p>page.former-authors, <b>{{ page.author }}</b></p>
-          {% elsif page.author and page.latter-authors %}
-            <p><b>{{ page.author }}</b>, page.latter-authors</p>
+          {% if page.author and page.authors2 and page.authors1 %}
+            <p>page.authors1, <b>{{ page.author }}</b>, page.authors2</p>
+          {% elsif page.author and page.authors1 %}
+            <p>page.authors1, <b>{{ page.author }}</b></p>
+          {% elsif page.author and page.authors2 %}
+            <p><b>{{ page.author }}</b>, page.authors2</p>
           {% endif %}
 <!--           <p>Published in <i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }} </p> -->
           <p>{{ page.date | date: "%B %d, %Y" }}</p>
