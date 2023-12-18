@@ -36,7 +36,21 @@
     {% if post.read_time %}
       <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p>
     {% endif %}
-    {% if post.venue%}<p class="archive__item-excerpt" itemprop="description">{{ post.citation }}</p> {% endif %}
+    {% if post.venue%}
+      {% if post.author and post.authors2 and post.authors1 %}
+        <p class="archive__item-excerpt" itemprop="description">{{ post.authors1 }}, <b>{{ post.author }}</b>, {{ post.authors2 }}</p>
+      {% elsif post.author and post.authors1 %}
+        <p class="archive__item-excerpt" itemprop="description">{{ post.authors1 }}, <b>{{ post.author }}</b></p>
+      {% elsif post.author and post.authors2 %}
+        <p class="archive__item-excerpt" itemprop="description"><b>{{ post.author }}</b>, {{ post.authors2 }}</p>
+      {% endif %}
+<!--           <p>Published in <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }} </p> -->
+      <p class="archive__item-excerpt" itemprop="description">{{ post.date | date: "%B %d, %Y" }}</p>
+      <p class="archive__item-excerpt" itemprop="description"><i>{{ post.venue }}</i></p>
+
+      
+<!--       <p class="archive__item-excerpt" itemprop="description">{{ post.citation }}</p>  -->
+    {% endif %}
     </li>
  </article>
 </div>
