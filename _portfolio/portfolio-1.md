@@ -1,6 +1,6 @@
 ---
 title: "ParkinGPT"
-excerpt: "A GPT-drived interactive app for greener, safer, and smarter parking<br/><img src='/images/parkingpt.jpeg'>"
+excerpt: "A GPT-drived interactive app for greener, safer, and smarter parking.<br/><img src='/images/parkingpt.jpeg'>"
 collection: portfolio
 portfoliolink: "https://devpost.com/software/destchat"
 ---
