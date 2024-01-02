@@ -1,6 +1,6 @@
 ---
 title: "ParkinGPT"
-excerpt: "A GPT-drived interactive app for greener, safer, and smarter parking<br/><img src='/images/parkingpt.jpg'>"
+excerpt: "A GPT-drived interactive app for greener, safer, and smarter parking<br/><img src='/images/parkingpt.jpeg'>"
 collection: portfolio
 ---
 
