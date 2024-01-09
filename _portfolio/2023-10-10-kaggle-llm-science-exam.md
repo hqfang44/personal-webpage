@@ -1,81 +1,189 @@
 ---
-title: "ParkinGPT"
-excerpt: "A GPT-drived interactive app for greener, safer, and smarter parking.<br/><img src='/images/parkingpt.jpeg'>"
+title: "Kaggle - LLM Science Exam"
+excerpt: "Use LLMs to answer difficult science questions<br/><img src='/images/kaggle-llm-science-exam.png'>"
 collection: portfolio
-portfoliolink: "https://devpost.com/software/destchat"
-date: 2023-12-03
+portfoliolink: "https://devpost.com/software/destchat](https://www.kaggle.com/competitions/kaggle-llm-science-exam/discussion/446303#2477056"
+date: 2023-10-10
 ---
 
-## Inspiration
+# Introduction
 
-Parking, both essential and frustrating for drivers, is a daily topic in our lives that we cannot avoid. Have you ever experienced a sense of despair while navigating through a congested parking lot? Parking issues not only affect our emotions but also have an impact on the environment. According to the analysis by INRIX in 2017, American drivers spend an average of 17 hours a year searching for parking spots, which adds up to an estimated $345 per driver in wasted time, fuel, and emissions.
+First of all, we would like to express our sincere appreciation to the competition organizers and competitors who shared their valuable thoughts and resources during the competition.
 
-That’s how we came up with our project—ParkinGPT. The initiation of this project is to park in a Greener, Safer, and Smarter way. Using ParkinGPT, we can fully explore the power of the state-of-the-art large language model, GPT-4, which could leverage smarter ways of interacting with navigation applications. With the assistance of GPT-4, users intuitively use natural language conversations to find optimal parking lot options to save more time and fuel. We also incorporate safety factors by using INRIX APIs when choosing the lot, ensuring the user's personal safety.
+Before starting, feel free to take a quick look at our **[notebook](https://www.kaggle.com/code/hqfang/kaggle-llmse-inference)** solution.  I would also like to introduce our team members: **[@yuekaixueirc](https://www.kaggle.com/yuekaixueirc)**, **[@lindseywei](https://www.kaggle.com/lindseywei)**, and **[@hqfang](https://www.kaggle.com/hqfang)**.
 
+Our team's solution started from [@mbanaei](https://www.kaggle.com/mbanaei)'s [notebook](https://www.kaggle.com/code/mbanaei/86-2-with-only-270k-articles). We made changes in three different parts: **Context Retrieval**, **Model Inference**, and **Ensemble Models**.
 
-## What it does
+<br>
 
-The logistics of our project are the following: The user initially tells ParkinGPT their destination through the AI chat box. ParkinGPT will extract the location from their dialog, search it in Google Map, return several results, and let the user confirm their destination. After that, ParkinGPT will recommend parking lots around the destination by applying INRIX’s off-street parking API. At the same time, it will also pull out the safety alert information around the user’s destination using INRIX’s incidents API to tell whether a recommended parking lot is safe. With this information, ParkinGPT will run a Random Forest Regressor to compute a rating score for each parking lot, sort all the parking lots based on the ratings, choose the top 5 options and provide them to the users. If the user is unsatisfied with the result, they could give more instructions to ParkinGPT through the chat box to regenerate results following the same procedure above.
+# Context Retrieval
 
+We kept the original RAG method in the notebook. On top of that, we borrowed one more context source from [@cdeotte](https://www.kaggle.com/cdeotte)'s [notebook](https://www.kaggle.com/code/cdeotte/how-to-train-open-book-model-part-2). Moreover, when retrieving relevant contexts using prompt and options, we found that [@mbanaei](https://www.kaggle.com/mbanaei)'s way of weighting the prompt by repeating it three times worked better, so we did it the same way for the context retrieval we added, that is:
 
-## How we built it
+    trn['answer_all'] = trn.apply(lambda x: " ".join([x['A'], x['B'], x['C'], x['D'], x['E']]), axis=1)
+    trn['prompt_answer_stem'] = trn['prompt'] + " " + trn['prompt'] + " " + trn['prompt'] + " " + trn['answer_all']
 
-Our project mainly has 3 parts: machine learning, back-end, and front-end. We will go through them one by one.
+We also found that [@mbanaei](https://www.kaggle.com/mbanaei)'s way of reversing the order of relevant context to make relevant contexts closer to the prompt and options also useful, so we did it the same way for the context retrieval we added, that is:
 
-**Front-End**
+    contexts = []
 
-We used React.js in Next.js to implement the entire front-end framework and combine it with Tailwind and Material UI to customize its appearance. Since we focus on finding locations and parking lots, we embedded Google Map into our website and made it the primary tool to visualize all the data processed from the back-end. We provided a chatbot that incorporates GPT-4 as the tool to parse a conversation with the users so that we can enhance our user experience and make the website more interactive. 
+    for r in tqdm(trn.itertuples(), total=len(trn)):
 
-**Back-End**
+        prompt_id = r.Index
 
-We embedded several APIs from Google Map (Places API), Open AI (...), and INRIX(lots API and incident API) and implemented our own API based on Flask (with our machine learning model). The back-end works like this: it receives data as input queries, and after several data processing, data is then used to send a request to API for information we need. Our back-end structure includes mainly 3 parts: one folder for the definition of parameters being used to send requests, one folder for validation check of input query and parameters, and one folder for API connection, requests sending, data post-processiang, and backward data responding. Through these solid steps, we avoid invalid inputs and fatal errors and clearly organize the transfer of data between the front-end and back-end.
+        prompt_indices =     processed_wiki_text_data[processed_wiki_text_data['document_id'].isin(wikipedia_file_data[wikipedia_file_data['prompt_id']==prompt_id]['id'].values)].index.values
 
-**Machine Learning**
+        if prompt_indices.shape[0] > 0:
+            prompt_index = faiss.index_factory(wiki_data_embeddings.shape[1], "Flat")
+            prompt_index.add(wiki_data_embeddings[prompt_indices])
 
-We randomly chose 39 locations located in downtown San Francisco. In each of them, we used off-street INRIX API to search for parking lots within 1000 meters of those locations. In total, we found 3517 different parking lots. We then extracted 6 features out of the JSON output for each parking lot. They include the percentage of occupied inside the facility (in %), the likelihood of finding a parking spot within the facility (in %), the calculated amount of available parking spots, the distance of the parking lot to the user’s destination (in meters), the level of pricing for parking (cannot find docs on the website, the higher the number, the higher the cost, -1 if null), the average rating score of that parking lot (in a scale from 1 to 5, -1 if null). 
+            context = ""
+            context_temp = []
+        
+            ss, ii = prompt_index.search(question_embeddings, NUM_SENTENCES_INCLUDE)
+            for _s, _i in zip(ss[prompt_id], ii[prompt_id]):
+                context_temp.append(processed_wiki_text_data.loc[prompt_indices]['text'].iloc[_i])
+            
+            context_temp.reverse()
+        
+            for i in range(len(context_temp)):
+                context += context_temp[i] + "\n"
+            
+        contexts.append(context)
+    
+    contexts_wiki = contexts
+    del contexts
+    gc.collect()
 
-After that, among those parking lots’ locations, we randomly chose 31 locations to run incidents INRIX API to search for safety alerts within 100 to 500 meters of those parking lots (since the running time is unstable, we had to adjust the radius). We got 897 different incidents in total. Then, we extracted 4 more features for each parking lot. For each parking lot, consider all incidents happening within 500 meters. We added the severity of each of the four types of incidents and made them into 4 different features to indicate how dangerous a given parking lot is. We then did prompt engineering in detail to teach GPT-4 to learn about our dataset and label our dataset with a consistent methodology. We asked it to go through each parking lot, use feature data, and rate the parking lot on a scale of 16 to 20 with a standard deviation over 1, where we then manually subtracted 15 out of every rating to rectify the scale to 1 to 5 (we did this because when directly telling GPT-4 to rate in a scale of 1 to 5, it will never meet our need). Next, we standardized the feature data using the Z-score approach to promote our future training. We then trained 4 different regression models (Linear Regression, Random Forest Regressor, Gradient Boosting Regressor, and Decision Tree Regressor) with K-Folds of 10. After comparing all models, we found that Random Forest Regressor showed the lowest MSE of 0.102 (or RMSE of 0.319). Finally, in order to connect our model to the server, we built a model prediction API using the Python package Flask.
+We also changed the variable `NUM_SENTENCES_INCLUDE` in the added retrieval to 15 in order to make our contexts have less irrelevant information.
 
+Also, Inspired by [@simjeg](https://www.kaggle.com/simjeg)'s [notebook](https://www.kaggle.com/code/simjeg/platypus2-70b-with-wikipedia-rag), we made use of the variable `IS_TEST_SET` to save local run time for context retrieval.
 
-## Challenges we ran into
+# Model Inference
 
-**Front-End**
+Instead of using a Longformer, we chose to use DeBERTa as it outperformed the Longformer in our experiments. Considering to add more diversity to the inference, also inspired by [@itsuki9180](https://www.kaggle.com/itsuki9180)'s [notebook](https://www.kaggle.com/code/itsuki9180/llm-sciex-optimise-ensemble-weights), we decided to use both OpenBook models and non-OpenBook models.
 
-The first challenge in the front-end part was embedding Google Map into our website. There were some problems with obtaining Map Javascript API keys and implementing the Map in React, but we managed to overcome this issue with some searching on the internet. The second challenge was to design and implement the user interface. We were using Material UI, which provides us with lots of tools for great styling. However, we couldn’t figure out how to overwrite some minor changes we didn’t want from the default styling in Material UI. We managed to solve it at last using the important keyword even though the styling was unfavorable. Lastly, we need to connect our chatbox to GPT-4 and use a data structure to store all the past conversations, as we need to print it out to the user. 
+Among the OpenBook models, we used three DeBERTas trained locally by [@yuekaixueirc](https://www.kaggle.com/yuekaixueirc) primarily using [@cdeotte](https://www.kaggle.com/cdeotte)'s [notebook](https://www.kaggle.com/code/cdeotte/how-to-train-open-book-model-part-1). Among the non-OpenBook models, we used one DeBERTa trained locally by [@hqfang](https://www.kaggle.com/hqfang) primarily using [@radek1](https://www.kaggle.com/radek1)'s [notebook](https://www.kaggle.com/code/radek1/new-dataset-deberta-v3-large-training), one DeBERTa trained locally by [@lindseywei](https://www.kaggle.com/lindseywei) using the [LoRA](https://www.kaggle.com/code/datafan07/single-model-rewardtrainer-lora-llm/notebook) technique, and one DeBERTa posted publicly by [@itsuki9180](https://www.kaggle.com/itsuki9180) using the [AWP](https://www.kaggle.com/code/itsuki9180/introducing-adversarial-weight-perturbation-awp) technique.
 
-**Back-End**
+All of the models we trained are posted publicly in this **[dataset](https://www.kaggle.com/datasets/hqfang/kaggle-llmse-dataset)**.
 
-For the back-end part, we faced challenges when we tried to develop our own API. We had little to no experience in developing in Flask. Also, the interaction between our back-end and our own API took us hours to figure out. When using existing APIs provided by tech companies, we are provided detailed documentation about what input and output are expected. To develop and use our own API, we had to define input and output ourselves. We had to balance the difficulties of providing satisfying input to API while suffering from complicated data post-processing and doing as little as possible data processing at the back end while handing over all tasks to API. Unlike using existing API, we had the right to modify and update our own API. Decision-making on such problems can always be torturing, especially when we have no experience in judging what benefited us most.
+For the inference part of the OpenBook models, we changed the way of tokenizing samples to the one we used for training, that is:
 
-**Machine Learning**
+    def prepare_answering_input(
+            tokenizer, 
+            question,  
+            options,   
+            context,   
+            max_seq_length=1024,
+        ):
+    
+        first_sentence = [ "[CLS] " + context ] * 5
+        second_sentences = [" #### " + question + " [SEP] " + options[option] + " [SEP]" for option in range(0,5)]
 
-We mainly met three challenges for the machine learning part of our project. During our data acquisition process, we came across an issue when using the off-street parking INRIX API: the running time of one single search was unexpectedly long. The solution to that is to use three laptops at the same time and decrease the radius of search. In need of over 3500 ground-truth labels for training usage, it was also challenging for us to label them all manually due to the incredibly large workload. To solve that, we made a smart use of the GPT-4 to help us label them all. However, the prompt engineering process was also torturous for us, just like training a toddler. Plus, when trying to post our trained machine learning model to the server, we also struggled to learn how to use Flask, but fortunately, we made it through all the difficulties.
+        tokenized_examples = tokenizer(
+            first_sentence, second_sentences,
+            max_length=max_seq_length,
+            padding="longest",
+            truncation="only_first",
+            return_tensors="pt",
+            add_special_tokens=False
+        )
+    
+        input_ids = tokenized_examples['input_ids'].unsqueeze(0)
+        attention_mask = tokenized_examples['attention_mask'].unsqueeze(0)
+        example_encoded = {
+            "input_ids": input_ids.to(model.device.index),
+            "attention_mask": attention_mask.to(model.device.index),
+        }
+    
+        return example_encoded
 
+Note that we also changed the `max_seq_length` to 1024.
 
-## Accomplishments that we're proud of
+We kept the inference code as it was, but changed some details to make it only output the probabilities for further use. What's more, we assigned weights of the three predictions of different contexts as 4:4:2. See more below:
 
-1. A massive back-end API proxy that makes connection to the GPT-4 API, AWS API, Google Map API, and INRIX API to enable all the queries the user would like to request. 
-2. Created a training dataset by combining the lots API and incidents API of INRIX and trained it to achieve a parking lot recommendation model.
-3. Successfully loaded the machine learning model to javascript, making the application smarter.
-4. Designed and developed a sophisticated, modern-styled navigation website, incorporating cutting-edge user interface principles and seamless user experience.
-5. Made and uploaded a structured collection of codes and datasets on GitHub for us to maintain and keep record.
+    def get_predictions_ob(model_dir):
+        df_valid = pd.read_csv("/kaggle/input/kaggle-llm-science-exam/test.csv")
+        trn2 = pd.read_csv('/kaggle/working/test_with_context_v2.csv')
+        tokenizer = AutoTokenizer.from_pretrained(model_dir)
+        model = AutoModelForMultipleChoice.from_pretrained(model_dir).cuda()
+    
+        predictions = []
 
+        for index in tqdm(range(trn2.shape[0])):
+            columns = df_valid.iloc[index].values
+            question = columns[1]
+            options = [columns[2], columns[3], columns[4], columns[5], columns[6]]
+            context1 = trn2['context'][index]
+            context2 = trn2['context_parsed'][index]
+            context3 = trn2['context_wiki'][index]
+            inputs1 = prepare_answering_input(
+                tokenizer=tokenizer, question=question,
+                options=options, context=context1,
+                )
+            inputs2 = prepare_answering_input(
+                tokenizer=tokenizer, question=question,
+                options=options, context=context2,
+                )
+            inputs3 = prepare_answering_input(
+                tokenizer=tokenizer, question=question,
+                options=options, context=context3,
+                )
 
-## What we learned
+            with torch.no_grad():
+                outputs1 = model(**inputs1)    
+                losses1 = -outputs1.logits[0].detach().cpu().numpy()
+                probability1 = torch.softmax(torch.tensor(-losses1), dim=-1)
 
-1. Using, calling, and understanding a variety of APIs, including INRIX API, GPT-4 API, Google Map API, Flask API.
-2. Designing, collecting, and processing raw datasets in INRIX API into a structured and formalized dataset.
-3. Preparing, training, validating, and applying numerous machine learning models using K-Folds techniques.
-4. Designing, creating, and implementing an innovative UI design for the infrastructure of ParkinGPT and better user experiences.
-5. Designing, modifying, and building a massive backend structure that utilizes a lot of RESTful APIs to pursue our goals.
+            with torch.no_grad():
+                outputs2 = model(**inputs2)
+                losses2 = -outputs2.logits[0].detach().cpu().numpy()
+                probability2 = torch.softmax(torch.tensor(-losses2), dim=-1)
+            
+            with torch.no_grad():
+                outputs3 = model(**inputs3)
+                losses3 = -outputs3.logits[0].detach().cpu().numpy()
+                probability3 = torch.softmax(torch.tensor(-losses3), dim=-1)
 
+            probability_ = probability1 * 0.4 + probability2 * 0.4 + probability3 * 0.2
 
-## What's next for ParkinGPT
+            predictions.append(probability_.numpy())
 
-1. Expand the size of diversity of our dataset to increase the competency and robustness of our machine learning models and explore more possibilities of model choices.
-2. Enable more utilities including adding the function of giving advice for multiple destinations.
-3. Gather more on-streets parking data so that we could use that to provide on-street parking advice (we don’t have data that are detailed enough).
-4. Add a transaction function to help user easily and conveniently do the parking payment directly on the application.
-5. Record the user’s parking lot preference and use a recommendation algorithm to use the historical parking pattern to make further suggestions.
-6. Integrate a speech recognition function to enable users to interact with ParkinGPT in real audio conversation.
-7. Use a database to store users’ chat history so that ParkinGPT could provide more personalized services to improve user experiences.
+        predictions = np.array(predictions)
+    
+        return predictions
+
+Also, Inspired by [@simjeg](https://www.kaggle.com/simjeg)'s [notebook](https://www.kaggle.com/code/simjeg/platypus2-70b-with-wikipedia-rag) again, we made use of the variable `IS_TEST_SET` to save GPU run time for OpenBook model inference.
+
+<br>
+
+# Ensemble Models
+
+To avoid overfitting the public LB, we simply took the average of the three OpenBook models. When ensembling the three non-OpenBook models, we assigned specific weights we derived from previous experience when playing with [@itsuki9180](https://www.kaggle.com/itsuki9180)'s [notebook](https://www.kaggle.com/code/itsuki9180/llm-sciex-optimise-ensemble-weights). After that, we assigned the OpenBook models to take 90% of the total prediction, while the non-OpenBook models could only take 10%. Finally we can ensemble the inference using the weights below:
+
+    ws = [0.65 / 3, 0.65 / 3, 0.65 / 3, 0.12, 0.15, 0.08]
+    ws = np.array(ws)
+
+    openbook_w = 0.9 / 0.65
+    other_w = 0.1 / 0.35
+
+    ws[0] = ws[0] * openbook_w
+    ws[1] = ws[1] * openbook_w
+    ws[2] = ws[2] * openbook_w
+    ws[3] = ws[3] * other_w
+    ws[4] = ws[4] * other_w
+    ws[5] = ws[5] * other_w
+
+    predictions_overall = deberta_ob_preds_eric_0897 * ws[0] + deberta_ob_preds_eric_088 * ws[1] + deberta_ob_preds_eric_0916 * ws[2] + deberta_preds_billy_v1 * ws[3] + deberta_awp_preds_itk * ws[4] + deberta_lora_preds_lindsey * ws[5]
+
+<br>
+
+# Conclusion
+
+In summary, what we mainly did in this competition was trying different kinds of ensembles, including ensembling different contexts and models. In those ensembles, we mainly contributed to training different models that were better than the ones posted publicly, and we borrowed those useful RAGs and brought them together with some fine-tuning. We were deeply surprised by the amazing open-source environment which helped everyone thrive in this competition. 
+
+Finally, thanks again to all the competitors who shared those invaluable ideas that we could work on. We wouldn't get to this position without their effort. 
+
+<br>
+
+*P.S. Our score of 0.905 on the PB was achieved by a solution that did not use non-OpenBook models, it maintained the same weights for contexts ensemble but took the average of the three OpenBook models. However, the approach we posted here could achieve a score of 0.906, which is the best score on PB among all of our submissions. Hence we chose to post the best one publicly. Also, the score of 0.915 on the LB was achieved by a solution that is exactly the same as the one posted here, where we only changed to take the average of the three contexts.*
