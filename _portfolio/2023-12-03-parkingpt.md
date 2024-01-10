@@ -1,6 +1,6 @@
 ---
 title: "ParkinGPT"
-excerpt: "A GPT-drived interactive app for greener, safer, and smarter parking<br/><img src='/images/parkingpt.jpeg'>"
+excerpt: "A GPT-drived interactive app for greener, safer, and smarter parking<br/><img src='/images/parkingpt.jpeg'><br/>image source: [kaggle](https://www.kaggle.com/competitions/kaggle-llm-science-exam)"
 collection: portfolio
 portfoliolink: "https://devpost.com/software/destchat"
 date: 2023-12-03
