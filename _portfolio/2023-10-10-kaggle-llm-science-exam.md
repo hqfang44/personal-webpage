@@ -1,6 +1,6 @@
 ---
 title: "Kaggle - LLM Science Exam"
-excerpt: "Use LLMs to answer difficult science questions<br/><img src='/images/kaggle-llm-science-exam.png'>"
+excerpt: "Use LLMs to answer difficult science questions<br/><img src='/images/kaggle-llm-science-exam.png'><br/>image source: [Kaggle](https://www.kaggle.com/competitions/kaggle-llm-science-exam)"
 collection: portfolio
 portfoliolink: "https://devpost.com/software/destchat](https://www.kaggle.com/competitions/kaggle-llm-science-exam/discussion/446303#2477056"
 date: 2023-10-10
