@@ -13,7 +13,7 @@ Education
 ======
 * University of Washington, 2022-2026 (expected)
   * B.S. in Computer Science, Statistics
-  * Minor in Mathematics (intended)
+  * Minor in Mathematics
 
 Experience
 ======
