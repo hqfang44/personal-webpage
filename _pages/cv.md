@@ -9,20 +9,17 @@ redirect_from:
 
 {% include base_path %}
 
-🎓 Education
-======
+## 🎓 Education
 * University of Washington, 2022-2026 (expected)
   * B.S. in Computer Science, Statistics
   * Minor in Mathematics
 
-📍 Experience
-======
+## 📍 Experience
 * Summer 2023: Research Engineer Intern
   * Nokia Shanghai Bell
   * Duties Included: data generation, LLM fine-tuning
 
-📝 Publications
-======
+## 📝 Publications
   <ul>{% for post in site.publications %}
     {% include archive-single-cv.html %}
   {% endfor %}</ul>
