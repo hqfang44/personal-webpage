@@ -13,7 +13,7 @@ Hi! I'm an undergraduate student and researcher at the University of Washington.
 ## 📝 Selected Publications
 
 - [Auxiliary Diagnostic Method for Early Autism Spectrum Disorder Based on Eye Movement Data Analysis](https://ieeexplore.ieee.org/document/9754665)
-**Haoquan Fang**, Lei Fan, Jenq-Neng Hwang
+**Haoquan Fang**, Lei Fan, Jenq-Neng Hwang \
 *CCIS 2021*
 
 ## 🎓 Education
@@ -22,6 +22,6 @@ Hi! I'm an undergraduate student and researcher at the University of Washington.
   - Minor in Mathematics
 
 ## 👨‍💻 Industrial Experience
-- Nokia Shanghai Bell - Research Engineer Intern
-2023.07-2023.08
+- Nokia Shanghai Bell - Research Engineer Intern \
+2023.07-2023.08 \
 Supervised by Quan Wang
