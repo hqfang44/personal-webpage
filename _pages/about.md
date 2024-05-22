@@ -22,8 +22,9 @@ Hi! I'm an undergraduate student and researcher at the University of Washington.
 
 ## 🎓 Education
 - University of Washington, 2022-2026 (expected)
-  - B.S. in Computer Science, Statistics
-  - Minor in Mathematics
+<br>*B.S. in Computer Science, Statistics*
+<br>*Minor in Mathematics*
+  - GPA: 3.99/4.00, Dean’s List (All Quarters & Years)
 
 ## 🏅 Honors & Awards
 - Kaggle - LLM Science Exam, Silver Medal (Top 4%)
