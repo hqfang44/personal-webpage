@@ -15,12 +15,17 @@ Hi! I'm an undergraduate student and researcher at the University of Washington.
 <br>**Haoquan Fang**, Lei Fan, Jenq-Neng Hwang
 <br><ins>*CCIS 2021*</ins>
 
+## 👨‍💻 Industrial Experience
+- Nokia Shanghai Bell - Research Engineer Intern
+<br>2023.07-2023.08
+<br>Supervised by Quan Wang
+
 ## 🎓 Education
 - University of Washington, 2022-2026 (expected)
   - B.S. in Computer Science, Statistics
   - Minor in Mathematics
 
-## 👨‍💻 Industrial Experience
-- Nokia Shanghai Bell - Research Engineer Intern \
-<br>2023.07-2023.08
-<br>Supervised by Quan Wang
+## 🏅 Honors & Awards
+- Kaggle - LLM Science Exam, Silver Medal (Top 4%)
+- RSNA Screening Mammography Breast Cancer Detection, Solo Silver Medal (Top 5%)
+
