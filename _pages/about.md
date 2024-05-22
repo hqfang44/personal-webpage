@@ -12,7 +12,7 @@ Hi! I'm an undergraduate student and researcher at the University of Washington.
 
 ## 📝 Selected Publications
 
-- [Auxiliary Diagnostic Method for Early Autism Spectrum Disorder Based on Eye Movement Data Analysis](https://ieeexplore.ieee.org/document/9754665)
+- [Auxiliary Diagnostic Method for Early Autism Spectrum Disorder Based on Eye Movement Data Analysis](https://ieeexplore.ieee.org/document/9754665) \
 **Haoquan Fang**, Lei Fan, Jenq-Neng Hwang \
 *CCIS 2021*
 
