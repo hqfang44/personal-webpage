@@ -7,8 +7,9 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Haoquan Fang’s Page"
+title                    : "Haoquan Fang"
 title_separator          : "-"
+nav_title                : "Home"
 name                     : &name "Haoquan Fang"
 description              : &description "CS + Stat BS at UW"
 url                      : https://hqfang44.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
