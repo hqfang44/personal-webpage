@@ -27,7 +27,7 @@ Hi! I'm an undergraduate student and researcher at the University of Washington.
   - GPA: 3.99/4.00, Dean’s List (All Quarters & Years)
 
 ## 🏅 Competitions & Projects
-- [INRIX Hack](https://hackathon.inrix.com/), ParkinGPT [[website]](https://devpost.com/software/destchat)
-- [Kaggle - LLM Science Exam](https://www.kaggle.com/competitions/kaggle-llm-science-exam), Silver Medal (Top 4%) [[website]](https://www.kaggle.com/competitions/kaggle-llm-science-exam/discussion/446303)
-- [RSNA Screening Mammography Breast Cancer Detection](https://www.kaggle.com/competitions/rsna-breast-cancer-detection), Solo Silver Medal (Top 5%)
+- INRIX Hack, ParkinGPT [[website]](https://devpost.com/software/destchat)
+- Kaggle - LLM Science Exam, Silver Medal (Top 4%) [[website]](https://www.kaggle.com/competitions/kaggle-llm-science-exam/discussion/446303)
+- RSNA Screening Mammography Breast Cancer Detection, Solo Silver Medal (Top 5%)
 
