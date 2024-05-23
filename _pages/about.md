@@ -8,9 +8,6 @@ redirect_from:
   - /about/
   - /about.html
 ---
-a:hover {%
-   text-decoration:none;
-%}
     
 Hi! I'm an undergraduate student and researcher at the University of Washington. I double major in Computer Science and Statistics, with a minor in Mathematics. I am fortunate to be advised by Professor <a href="https://people.ece.uw.edu/hwang/" style="text-decoration:none">Jenq-Neng Hwang</a> at the [Information Processing Lab](https://ipl-uw.github.io/) in UW ECE and Professor [Dan Fu](https://chem.washington.edu/people/dan-fu) at the [Fu Lab](https://sites.uw.edu/fudanlab/) in UW Chemistry. I am also pleased to collaborate with PhD [Ying Jin](https://scholar.google.com/citations?hl=en&user=MNrLDhwAAAAJ). My research interests are broadly in the field of data science and AI, especially in machine learning and computer vision. I am interested in building intelligent data-driven tools that are broadly useful and robust. Recently, I am experimenting on the effectiveness of the LSE-Sign loss function, and responsible for the development of CellBackTrack.
 
