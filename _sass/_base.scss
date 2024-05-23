@@ -116,9 +116,7 @@ a {
     @extend %tab-focus;
   }
 
-  &:hover {
-     text-decoration: none;
-  }
+  &:hover,
   &:active {
     outline: 0;
   }
