@@ -17,12 +17,12 @@ Hi! I'm an undergraduate student and researcher at the University of Washington.
 <br>*CCIS 2021* [[PDF]](https://ieeexplore.ieee.org/document/9754665)
 
 ## 💼 Professional Experience
-- Nokia Shanghai Bell, *2023.07 - 2023.08*
+- **Nokia Shanghai Bell**, *2023.07 - 2023.08*
 <br>*Research Engineer Intern*
   - Supervised by Mr. Quan Wang, Explored [COSMIC](https://cosmic-sizing.org) Report Generation
 
 ## 🎓 Education
-- University of Washington, *2022 - 2026 (expected)*
+- **University of Washington**, *2022 - 2026 (expected)*
 <br>*B.S. in Computer Science, Statistics*
 <br>*Minor in Mathematics*
   - GPA: 3.99/4.00, Dean’s List (All Quarters & Years)
