@@ -19,7 +19,7 @@ Hi! I'm an undergraduate student and researcher at the University of Washington.
 ## 💼 Professional Experience
 - **Nokia Shanghai Bell**, *2023.07 - 2023.08*
 <br>*Research Engineer Intern*
-  - Supervised by Mr. Quan Wang, Explored [COSMIC](https://cosmic-sizing.org) Report Generation
+  - Supervised by Dr. Quan Wang, Explored [COSMIC](https://cosmic-sizing.org) Report Generation
 
 ## 🎓 Education
 - **University of Washington**, *2022 - 2026 (expected)*
