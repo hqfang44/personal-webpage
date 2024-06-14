@@ -25,7 +25,7 @@ Hi! I'm an undergraduate student and researcher at the University of Washington.
 - **University of Washington**, *2022 - 2026 (expected)*
 <br>*B.S. in Computer Science, Statistics*
 <br>*Minor in Mathematics*
-  - GPA: 3.99/4.00, Dean’s List (All Quarters & Years)
+  - GPA: 3.99/4.00 (Straight A in All Courses), Dean’s List (All Quarters & Years)
 
 ## 🏅 Competitions & Projects
 - INRIX Amazon University Hack 2023, **ParkinGPT** [[website]](https://devpost.com/software/destchat)
