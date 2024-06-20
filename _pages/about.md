@@ -17,7 +17,7 @@ Hi! I'm an undergraduate student and researcher at the University of Washington.
 <br>*CCIS 2021* [[PDF]](https://ieeexplore.ieee.org/document/9754665)
 
 ## 💼 Professional Experience
-- **Nokia Shanghai Bell**, *2023.07 - 2023.08*
+- **Nokia Shanghai Bell**, *Jul 2023 - Aug 2023*
 <br>*Research Engineer Intern*
   - Supervised by Dr Quan Wang, Explored [COSMIC](https://cosmic-sizing.org) Report Generation
 
