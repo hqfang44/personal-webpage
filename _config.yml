@@ -83,12 +83,12 @@ analytics:
 author:
   name             : "Haoquan Fang"
   avatar           : "bio-photo-real.jpg"
-  bio              : "CS + Stat BS @ UW"
+  bio              : "Research Assistant @ IPL"
   location         : # "Location"
   employer         :
   pubmed           : # "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
   googlescholar    : "https://scholar.google.com/citations?hl=en&user=O-D4QqsAAAAJ"
-  sementicscholar  : "https://www.semanticscholar.org/author/Haoquan-Fang/2162568032"
+  sementicscholar  : # "https://www.semanticscholar.org/author/Haoquan-Fang/2162568032"
   email            : # "haoquan.fang@outlook.com"
   researchgate     : # example: "https://www.researchgate.net/profile/yourprofile"
   uri              :
