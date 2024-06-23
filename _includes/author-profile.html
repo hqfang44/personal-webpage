@@ -32,6 +32,9 @@
       {% if author.googlescholar %}
         <li><a href="{{ author.googlescholar }}"><i class="fas fa-fw fa-graduation-cap"></i> Google Scholar</a></li>
       {% endif %}
+      {% if author.sementicscholar %}
+        <li><a href="{{ author.sementicscholar }}"><i class="fas fa-fw fa-file-circle-check"></i> Sementic Scholar</a></li>
+      {% endif %}
       {% if author.github %}
         <li><a href="https://github.com/{{ author.github }}"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
       {% endif %}
