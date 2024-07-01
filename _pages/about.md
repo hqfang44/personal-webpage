@@ -11,7 +11,7 @@ redirect_from:
     
 Hi! I'm an undergraduate student and researcher at the University of Washington. I double major in Computer Science and Statistics, with a minor in Mathematics. I am fortunate to be advised by Professor [Jenq-Neng Hwang](https://people.ece.uw.edu/hwang) at the [Information Processing Lab](https://ipl-uw.github.io) (IPL) in UW ECE and Professor [Dan Fu](https://chem.washington.edu/people/dan-fu) at the [Fu Lab](https://sites.uw.edu/fudanlab) in UW Chemistry. I am also pleased to collaborate with Dr [Ying Jin](https://scholar.google.com/citations?hl=en&user=MNrLDhwAAAAJ). 
 
-My research interests are broadly in the fields of computer vision and natural language processing. I am especially passionate about vision-language pretraining, image-to-text generation, and diffusion model.
+My research interests are broadly in the fields of computer vision and natural language processing. I am especially passionate about vision-language pretraining, image-to-text generation, diffusion model, etc.
 
 ## 📑 Selected Publications
 - **DAug: Diffusion-based Channel Augmentation for Radiology Image Retrieval and Classification**
