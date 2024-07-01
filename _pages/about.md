@@ -33,7 +33,7 @@ My research interests are broadly in the fields of computer vision and natural l
   - GPA: 3.99/4.00 (Straight A in All Courses), Dean’s List (All Quarters & Years)
 
 ## 🏅 Competitions & Projects
-- INRIX Amazon University Hack 2023, **ParkinGPT** [[website]](https://devpost.com/software/destchat)
-- Kaggle - LLM Science Exam, **Silver Medal** (Top 4%) [[website]](https://www.kaggle.com/competitions/kaggle-llm-science-exam/discussion/446303)
+- INRIX Amazon University Hack 2023, **ParkinGPT** [[Website]](https://devpost.com/software/destchat)
+- Kaggle - LLM Science Exam, **Silver Medal** (Top 4%) [[Website]](https://www.kaggle.com/competitions/kaggle-llm-science-exam/discussion/446303)
 - RSNA Screening Mammography Breast Cancer Detection, **Solo Silver Medal** (Top 5%)
 
