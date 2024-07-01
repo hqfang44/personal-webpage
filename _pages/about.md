@@ -14,7 +14,7 @@ Hi! I'm an undergraduate student and researcher at the University of Washington.
 ## 📑 Selected Publications
 - **DAug: Diffusion-based Channel Augmentation for Radiology Image Retrieval and Classification**
 <br>Ying Jin, Zhuoran Zhou, <ins>Haoquan Fang</ins>, Jenq-Neng Hwang
-<br>*Under Review @ ACCV 2024*
+<br>*In Submission*
 - **Auxiliary Diagnostic Method for Early Autism Spectrum Disorder Based on Eye Movement Data Analysis**
 <br><ins>Haoquan Fang</ins>, Lei Fan, Jenq-Neng Hwang
 <br>*CCIS 2021* [[PDF]](https://ieeexplore.ieee.org/document/9754665)
